@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+#
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATFramework2.0", "ATFramework2.0\ATFramework2.0.csproj", "{7AA4DD9A-40E0-45FC-9E83-9BEC36441513}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleEarth.AutoTests", "GoogleEarth.AutoTests\GoogleEarth.AutoTests.csproj", "{F5BC3B21-37DE-463F-85BE-F1C0F5A608AD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7AA4DD9A-40E0-45FC-9E83-9BEC36441513}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AA4DD9A-40E0-45FC-9E83-9BEC36441513}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AA4DD9A-40E0-45FC-9E83-9BEC36441513}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AA4DD9A-40E0-45FC-9E83-9BEC36441513}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5BC3B21-37DE-463F-85BE-F1C0F5A608AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5BC3B21-37DE-463F-85BE-F1C0F5A608AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5BC3B21-37DE-463F-85BE-F1C0F5A608AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5BC3B21-37DE-463F-85BE-F1C0F5A608AD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
