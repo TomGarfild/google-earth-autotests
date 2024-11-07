@@ -6,6 +6,7 @@ namespace GoogleEarth.AutoTests.Pages;
 public interface IMainPage
 {
     void SelectMore(string name);
+    void ClickTour();
 }
 
 public class MainPage : IMainPage
@@ -20,10 +21,17 @@ public class MainPage : IMainPage
 
     private Element More => _webDriver.ElementFinder.XPath("//div[text() = 'More from Earth']");
     public Element OptionMore(string optionName) => _webDriver.ElementFinder.XPath($"//ul/li/a[text() = '{optionName}']");
+    
+    private Element TourGoogleEarth => _webDriver.ElementFinder.XPath("//a[contains(text(), 'Take a tour in Google Earth')]");
 
     public void SelectMore(string name)
     {
         More.Click();
         OptionMore(name).Click();
+    }
+
+    public void ClickTour()
+    {
+        TourGoogleEarth.Click();
     }
 }

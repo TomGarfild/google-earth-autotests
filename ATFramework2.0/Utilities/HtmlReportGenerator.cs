@@ -171,6 +171,6 @@ public class HtmlReportGenerator
         }
         _reportContent.AppendLine("</body></html>");
 
-        File.WriteAllText(_testSettings.PathToSaveReport + $"Report_{DateTime.Now}.html", _reportContent.ToString());
+        File.WriteAllText(_testSettings.PathToSaveReport + $"Report_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.html", _reportContent.ToString());
     }
 }

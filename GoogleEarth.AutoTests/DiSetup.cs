@@ -14,7 +14,8 @@ public class DiSetup : DiSetupBase
 
         services
             .AddScoped<IMainPage, MainPage>()
-            .AddScoped<IOutreachPage, OutreachPage>();
+            .AddScoped<IVerificationPage, VerificationPage>()
+            .AddScoped<ITourPage, TourPage>();
 
         return services;
     }

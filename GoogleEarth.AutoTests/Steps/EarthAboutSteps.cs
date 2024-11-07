@@ -7,7 +7,7 @@ using TechTalk.SpecFlow;
 namespace GoogleEarth.AutoTests.Steps;
 
 [Binding]
-public class EarthAboutSteps(IMainPage mainPage, IOutreachPage outreachPage, IWebDriverManager webDriver)
+public class EarthAboutSteps(IMainPage mainPage, IVerificationPage verificationPage, ITourPage tourPage, IWebDriverManager webDriver)
 {
     private void Log(string message, LogLevel level = LogLevel.Info, string feature = "Search")
     {
@@ -33,18 +33,29 @@ public class EarthAboutSteps(IMainPage mainPage, IOutreachPage outreachPage, IWe
         }
     }
 
-    [Given("Click on the search")]
-    public void GivenClickOnTheSearch()
+    [Given(@"Click on the ""(.*)"" ""(.*)""")]
+    [When(@"Click on the ""(.*)"" ""(.*)""")]
+    public void ClickOnTheSearch(string type, string name)
     {
         try
         {
-            Log("Clicking on the search.");
+            Log($"Clicking on the {type} {name}.");
 
-            // mainPage.ClickSearch();
+            switch (type, name)
+            {
+                case ("MainPage", "EarthTour"):
+                    mainPage.ClickTour();
+                    break;
+                case ("TourPage", _):
+                    tourPage.ClickOnTour(name);
+                    break;
+                default:
+                    throw new ArgumentException();
+            }
         }
         catch (Exception ex)
         {
-            LogException(ex, $"Clicking search");
+            LogException(ex, $"Clicking on the {type} {name}");
             throw;
         }
     }
@@ -64,30 +75,23 @@ public class EarthAboutSteps(IMainPage mainPage, IOutreachPage outreachPage, IWe
         }
     }
 
-    [Given(@"Enter text ""(.*)""")]
-    public void EnterTextToSearch(string text)
-    {
-        try
-        {
-            Log($"Entering '{text}' into the search.");
-            // mainPage.InputSearchText(text);
-        }
-        catch (Exception ex)
-        {
-            LogException(ex, "Entering text into search");
-            throw;
-        }
-    }
-
     [Then(@"Header ""(.*)"" is displayed")]
     public void ThenSuccessMessageIsDisplayed(string expText)
     {
         try
         {
             Log($"Verifying header: '{expText}'.");
+
+            Func<string> verAct = expText switch
+            {
+                "Earth Outreach" => verificationPage.GetOutreachHeader,
+                "Take a tour in Google Earth" => verificationPage.GetEarthNight,
+                _ => throw new ArgumentOutOfRangeException(nameof(expText), expText, null)
+            };
+            
             VerifyWorker.Equals(
                 exp: expText,
-                act: () => outreachPage.GetHeader(),
+                act: verAct,
                 message: $"Current header should be '{expText}'"
             );
         }
