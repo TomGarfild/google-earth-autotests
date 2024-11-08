@@ -7,7 +7,12 @@ using TechTalk.SpecFlow;
 namespace GoogleEarth.AutoTests.Steps;
 
 [Binding]
-public class EarthAboutSteps(IMainPage mainPage, IVerificationPage verificationPage, ITourPage tourPage, IWebDriverManager webDriver)
+public class EarthAboutSteps(
+    IMainPage mainPage,
+    IVerificationPage verificationPage,
+    ITourPage tourPage,
+    IEarthStudioPage earthStudioPage,
+    IWebDriverManager webDriver)
 {
     private void Log(string message, LogLevel level = LogLevel.Info, string feature = "Search")
     {
@@ -35,7 +40,7 @@ public class EarthAboutSteps(IMainPage mainPage, IVerificationPage verificationP
 
     [Given(@"Click on the ""(.*)"" ""(.*)""")]
     [When(@"Click on the ""(.*)"" ""(.*)""")]
-    public void ClickOnTheSearch(string type, string name)
+    public void ClickOnThe(string type, string name)
     {
         try
         {
@@ -43,11 +48,14 @@ public class EarthAboutSteps(IMainPage mainPage, IVerificationPage verificationP
 
             switch (type, name)
             {
-                case ("MainPage", "EarthTour"):
-                    mainPage.ClickTour();
+                case ("MainPage", _):
+                    mainPage.ClickPage(name);
                     break;
                 case ("TourPage", _):
                     tourPage.ClickOnTour(name);
+                    break;
+                case ("StudioPage", "SignUp"):
+                    earthStudioPage.ClickSignUp();
                     break;
                 default:
                     throw new ArgumentException();
@@ -60,8 +68,9 @@ public class EarthAboutSteps(IMainPage mainPage, IVerificationPage verificationP
         }
     }
 
+    [Given(@"Select More ""(.*)""")]
     [When(@"Select More ""(.*)""")]
-    public void GivenSelectSalutation(string moreName)
+    public void SelectMore(string moreName)
     {
         try
         {
@@ -86,9 +95,10 @@ public class EarthAboutSteps(IMainPage mainPage, IVerificationPage verificationP
             {
                 "Earth Outreach" => verificationPage.GetOutreachHeader,
                 "Take a tour in Google Earth" => verificationPage.GetEarthNight,
+                "Sign in" => verificationPage.GetSignIn,
                 _ => throw new ArgumentOutOfRangeException(nameof(expText), expText, null)
             };
-            
+
             VerifyWorker.Equals(
                 exp: expText,
                 act: verAct,

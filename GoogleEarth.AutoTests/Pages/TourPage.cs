@@ -16,18 +16,6 @@ public class TourPage(IWebDriverManager webDriver) : ITourPage
     public void ClickOnTour(string name)
     {
         Tour(name).Click();
-        
-        var originalWindow = webDriver.Driver.CurrentWindowHandle;
-
-        var wait = new WebDriverWait(webDriver.Driver, TimeSpan.FromSeconds(10));
-        wait.Until(driver => driver.WindowHandles.Count > 1);
-
-        foreach (var windowHandle in webDriver.Driver.WindowHandles)
-        {
-            if (windowHandle == originalWindow) continue;
-            
-            webDriver.Driver.SwitchTo().Window(windowHandle);
-            break;
-        }
+        webDriver.OpenAnotherWindow();
     }
 }

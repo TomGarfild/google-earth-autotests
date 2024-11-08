@@ -15,7 +15,8 @@ public class DiSetup : DiSetupBase
         services
             .AddScoped<IMainPage, MainPage>()
             .AddScoped<IVerificationPage, VerificationPage>()
-            .AddScoped<ITourPage, TourPage>();
+            .AddScoped<ITourPage, TourPage>()
+            .AddScoped<IEarthStudioPage, EarthStudioPage>();
 
         return services;
     }
